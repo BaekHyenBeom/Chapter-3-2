@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     public int dashDuration;
     private bool stopMove;
     public LayerMask groundLayerMask;
+
+    private Vector3 beforeDirection;
     
     [Header("Look")]
     public Transform cameraContainer;
@@ -22,7 +24,10 @@ public class PlayerController : MonoBehaviour
     public float lookSensitivity;
 
     private Vector2 mouseDelta;
-
+    public Transform cameraTransform;
+    public Vector3 thirdPerson;
+    public bool cameraChanged;
+    
     [HideInInspector]
     public bool canLook = true;
 
@@ -71,6 +76,24 @@ public class PlayerController : MonoBehaviour
         canLook = !toggle;
     }
 
+    // 카메라 인칭 변환
+    public void OnCameraInput(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            if (cameraChanged)
+            {
+                cameraChanged = false;
+                cameraTransform.localPosition = Vector3.zero;
+            }
+            else
+            {
+                cameraChanged = true;
+                cameraTransform.localPosition = thirdPerson;
+            }
+        }
+    }
+
     public void OnMoveInput(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Performed)
@@ -90,7 +113,19 @@ public class PlayerController : MonoBehaviour
         dir *= moveSpeed;
         dir.y = _rigidbody.velocity.y;
 
-        _rigidbody.velocity = dir;
+        if (dir != Vector3.zero)
+        {
+            _rigidbody.velocity = dir;
+            beforeDirection = dir;
+        }
+        else
+        {
+            if(dir != beforeDirection)
+            {
+                _rigidbody.velocity = dir;
+                beforeDirection = dir;
+            }
+        }
     }
 
     public void OnJumpInput(InputAction.CallbackContext context)

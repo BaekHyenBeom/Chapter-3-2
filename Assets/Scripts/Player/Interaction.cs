@@ -35,7 +35,7 @@ public class Interaction : MonoBehaviour
             Ray ray = camera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit, maxCheckDistance, layerMask))
+            if (Physics.Raycast(ray, out hit, maxCheckDistance * CheckCameraType(), layerMask))
             {
                 if (hit.collider.gameObject != curInteractGameObject)
                 {
@@ -67,6 +67,18 @@ public class Interaction : MonoBehaviour
             curInteractGameObject = null;
             curInteractable = null;
             promptText.gameObject.SetActive(false);
+        }
+    }
+
+    private int CheckCameraType()
+    {
+        if (CharacterManager.Instance.Player.controller.cameraChanged)
+        {
+            return 2;
+        }
+        else
+        {
+            return 1;
         }
     }
 }
