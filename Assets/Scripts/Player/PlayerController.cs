@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,8 +9,11 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed;
     private Vector2 curMovementInput;
     public float jumpForce;
+    public float dashForce;
+    public int dashDuration;
+    private bool stopMove;
     public LayerMask groundLayerMask;
-
+    
     [Header("Look")]
     public Transform cameraContainer;
     public float minXLook;
@@ -52,6 +56,21 @@ public class PlayerController : MonoBehaviour
         mouseDelta = context.ReadValue<Vector2>();
     }
 
+    void CameraLook()
+    {
+        camCurXRot += mouseDelta.y * lookSensitivity;
+        camCurXRot = Mathf.Clamp(camCurXRot, minXLook, maxXLook);
+        cameraContainer.localEulerAngles = new Vector3(-camCurXRot, 0, 0);
+
+        transform.eulerAngles += new Vector3(0, mouseDelta.x * lookSensitivity, 0);
+    }
+
+    public void ToggleCursor(bool toggle)
+    {
+        Cursor.lockState = toggle ? CursorLockMode.None : CursorLockMode.Locked;
+        canLook = !toggle;
+    }
+
     public void OnMoveInput(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Performed)
@@ -64,16 +83,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void OnJumpInput(InputAction.CallbackContext context)
-    {
-        if (context.phase == InputActionPhase.Started && IsGrounded())
-        {
-            _rigidbody.AddForce(Vector2.up * jumpForce, ForceMode.Impulse);
-        }
-    }
-
     private void Move()
     {
+        if (stopMove) { return; }
         Vector3 dir = transform.forward * curMovementInput.y + transform.right * curMovementInput.x;
         dir *= moveSpeed;
         dir.y = _rigidbody.velocity.y;
@@ -81,13 +93,16 @@ public class PlayerController : MonoBehaviour
         _rigidbody.velocity = dir;
     }
 
-    void CameraLook()
+    public void OnJumpInput(InputAction.CallbackContext context)
     {
-        camCurXRot += mouseDelta.y * lookSensitivity;
-        camCurXRot = Mathf.Clamp(camCurXRot, minXLook, maxXLook);
-        cameraContainer.localEulerAngles = new Vector3(-camCurXRot, 0, 0);
-
-        transform.eulerAngles += new Vector3(0, mouseDelta.x * lookSensitivity, 0);
+        if (context.phase == InputActionPhase.Started && IsGrounded())
+        {
+            if (CharacterManager.Instance.Player.condition.UseStamina(5))
+            {
+                _rigidbody.AddForce(Vector2.up * jumpForce, ForceMode.Impulse);
+            }
+            
+        }
     }
 
     bool IsGrounded()
@@ -111,9 +126,30 @@ public class PlayerController : MonoBehaviour
         return false;
     }
 
-    public void ToggleCursor(bool toggle)
+    // 추후에 대쉬 쿨타임도 넣어줄 것
+    public void OnDashInput(InputAction.CallbackContext context)
     {
-        Cursor.lockState = toggle ? CursorLockMode.None : CursorLockMode.Locked;
-        canLook = !toggle;
+        if (context.phase == InputActionPhase.Started && IsGrounded())
+        {
+            if (curMovementInput == Vector2.zero) { return; }
+            Vector3 dir = transform.forward * curMovementInput.y + transform.right * curMovementInput.x;
+            dir.y = _rigidbody.velocity.y;
+            if (CharacterManager.Instance.Player.condition.UseStamina(10))
+            {
+                StartCoroutine(Dash(dir));
+            }
+        }
+    }
+
+    IEnumerator Dash(Vector3 dir)
+    {
+        stopMove = true;
+        _rigidbody.AddForce(dir * moveSpeed, ForceMode.VelocityChange);
+        for (int i = 0; i < dashDuration; i++)
+        {
+            _rigidbody.AddForce(dir * dashForce, ForceMode.Impulse);
+            yield return new WaitForSeconds(0.01f);
+        }
+        stopMove = false;
     }
 }
