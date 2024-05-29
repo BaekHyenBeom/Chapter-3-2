@@ -12,7 +12,6 @@ public class PlayerCondition : MonoBehaviour, IDamagable
 
     Condition health { get { return uiCondition.health; } }
 
-    public float noHungerHealthDecay;
     public event Action onTakeDamage;
 
     private void Update()
