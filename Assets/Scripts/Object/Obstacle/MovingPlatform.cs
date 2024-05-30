@@ -14,12 +14,13 @@ public class MovingPlatform : MonoBehaviour
 
     private int curDirectionIdx;
 
+    // 감지 관련
     float top;
+    Collider collider;
 
     void Awake()
     {
-        Collider collider = GetComponent<Collider>();
-        top = transform.position.y + collider.bounds.extents.y;
+        collider = GetComponent<Collider>();
     }
 
     void Start()
@@ -52,6 +53,7 @@ public class MovingPlatform : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
+        top = transform.position.y + collider.bounds.extents.y;
         if (other.gameObject.transform.position.y >= top) // 상면 감지
         {
             other.transform.SetParent(transform);

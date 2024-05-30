@@ -18,7 +18,7 @@ public class LauncherPlatform : MonoBehaviour
     void Awake()
     {
         Collider collider = GetComponent<Collider>();
-        top = transform.position.y + collider.bounds.extents.y;
+        top = transform.position.y + collider.bounds.extents.y; // 정지해있을 경우 임시 방편이다.
     }
 
     private void OnCollisionEnter(Collision other)
