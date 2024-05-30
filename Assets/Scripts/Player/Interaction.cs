@@ -1,9 +1,17 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+public enum InteractionType
+{
+    Item,
+    Interactable
+}
+
 public interface IInteractable
 {
+    public InteractionType CheckType();
     public string GetInteractPrompt();
     public void OnInteract();
 }
@@ -20,6 +28,7 @@ public class Interaction : MonoBehaviour
 
     public TextMeshProUGUI promptText;
     private Camera camera;
+    public TextMeshProUGUI interactionText;
 
     void Start()
     {
@@ -41,20 +50,36 @@ public class Interaction : MonoBehaviour
                 {
                     curInteractGameObject = hit.collider.gameObject;
                     curInteractable = hit.collider.GetComponent<IInteractable>();
-                    SetPromptText();
+                    if (curInteractable.CheckType() == InteractionType.Item)
+                    {
+                        SetPromptText();
+                    }
+                    else if (curInteractable.CheckType() == InteractionType.Interactable)
+                    {
+                        SetInteractionText();
+                    }
                 }
             }
             else
             {
                 curInteractGameObject = null;
                 curInteractable = null;
+                interactionText.gameObject.SetActive(false);
                 promptText.gameObject.SetActive(false);
             }
         }
     }
 
+    private void SetInteractionText()
+    {
+        promptText.gameObject.SetActive(false);
+        interactionText.gameObject.SetActive(true);
+        interactionText.text = curInteractable.GetInteractPrompt();
+    }
+
     private void SetPromptText()
     {
+        interactionText.gameObject.SetActive(false);
         promptText.gameObject.SetActive(true);
         promptText.text = curInteractable.GetInteractPrompt();
     }

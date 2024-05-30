@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
     public PlayerController controller;
     public PlayerCondition condition;
     public Inventory inventory;
+    public PlayerUI playerUI;
 
     // 아이템 관련
     public ItemSO itemData;
@@ -16,5 +17,6 @@ public class Player : MonoBehaviour
         CharacterManager.Instance.Player = this;
         controller = GetComponent<PlayerController>();
         condition = GetComponent<PlayerCondition>();
+        playerUI = GetComponent<PlayerUI>();
     }
 }

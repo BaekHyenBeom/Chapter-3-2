@@ -15,7 +15,11 @@ public class PlayerController : MonoBehaviour
     public LayerMask groundLayerMask;
 
     private Vector3 beforeDirection;
-    
+
+    // 효과 관련
+    private float extraSpeed;
+    private float extraSpeedDuration;
+
     [Header("Look")]
     public Transform cameraContainer;
     public float minXLook;
@@ -43,6 +47,8 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
+    // update 반영
+
     private void Update()
     {
         if (stopMove <= 0) { return; }
@@ -64,6 +70,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+        // 카메라 회전 관련
     public void OnLookInput(InputAction.CallbackContext context)
     {
         mouseDelta = context.ReadValue<Vector2>();
@@ -102,6 +109,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+        // 이동 관련
     public void OnMoveInput(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Performed)
@@ -118,7 +126,7 @@ public class PlayerController : MonoBehaviour
     {
         if (stopMove > 0) { return; }
         Vector3 dir = transform.forward * curMovementInput.y + transform.right * curMovementInput.x;
-        dir *= moveSpeed;
+        dir *= moveSpeed + extraSpeed;
         dir.y = _rigidbody.velocity.y;
 
         if (dir != Vector3.zero)
@@ -136,6 +144,37 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void BuffSpeed(float duration, float value)
+    {
+        if (extraSpeedDuration <= 0) 
+        {
+            extraSpeedDuration = duration;
+            extraSpeed = value;
+            CharacterManager.Instance.Player.playerUI.EffectActive(duration);
+            StartCoroutine(SpeedBuff(duration, value)); 
+
+        }
+        else 
+        { 
+            extraSpeedDuration = duration;
+            CharacterManager.Instance.Player.playerUI.Duration(extraSpeedDuration);
+        }
+    }
+
+    IEnumerator SpeedBuff(float duration, float value)
+    {
+        
+        while (extraSpeedDuration > 0)
+        {
+            extraSpeedDuration -= 1;
+            CharacterManager.Instance.Player.playerUI.Duration(extraSpeedDuration);
+            yield return new WaitForSeconds(1f);
+        }
+        extraSpeed = 0;
+    }
+
+
+        // 점프
     public void OnJumpInput(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Started && IsGrounded())
@@ -170,6 +209,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // 추후에 대쉬 쿨타임도 넣어줄 것
+        // 대쉬
     public void OnDashInput(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Started && IsGrounded())
@@ -190,7 +230,7 @@ public class PlayerController : MonoBehaviour
         _rigidbody.AddForce(dir * moveSpeed, ForceMode.VelocityChange);
         for (int i = 0; i < dashDuration; i++)
         {
-            _rigidbody.AddForce(dir * dashForce, ForceMode.Impulse);
+            _rigidbody.AddForce(dir * (dashForce + extraSpeed), ForceMode.Impulse);
             yield return new WaitForSeconds(0.01f);
         }
         _rigidbody.velocity = Vector3.zero;
