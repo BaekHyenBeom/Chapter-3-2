@@ -1235,7 +1235,7 @@ MonoBehaviour:
   maxCheckDistance: 3
   layerMask:
     serializedVersion: 2
-    m_Bits: 384
+    m_Bits: 128
   promptText: {fileID: 879326296}
   interactionText: {fileID: 85256556}
 --- !u!114 &878975158
@@ -2291,6 +2291,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: ItemGiver (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 2511705265104342847, guid: 651312d51512df64f8f4bbd41bcea428, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3218941976768080283, guid: 651312d51512df64f8f4bbd41bcea428, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4232632621395214012, guid: 651312d51512df64f8f4bbd41bcea428, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4467524567516485979, guid: 651312d51512df64f8f4bbd41bcea428, type: 3}
       propertyPath: prefab
       value: 
@@ -2298,6 +2310,10 @@ PrefabInstance:
     - target: {fileID: 4467524567516485979, guid: 651312d51512df64f8f4bbd41bcea428, type: 3}
       propertyPath: objectName
       value: "\uBB34\uC801 \uD3EC\uC158 \uC0DD\uC131\uAE30"
+      objectReference: {fileID: 0}
+    - target: {fileID: 5727897871420573359, guid: 651312d51512df64f8f4bbd41bcea428, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2888,6 +2904,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: ItemGiver (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2511705265104342847, guid: 651312d51512df64f8f4bbd41bcea428, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3218941976768080283, guid: 651312d51512df64f8f4bbd41bcea428, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4232632621395214012, guid: 651312d51512df64f8f4bbd41bcea428, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4467524567516485979, guid: 651312d51512df64f8f4bbd41bcea428, type: 3}
       propertyPath: prefab
       value: 
@@ -2895,6 +2923,10 @@ PrefabInstance:
     - target: {fileID: 4467524567516485979, guid: 651312d51512df64f8f4bbd41bcea428, type: 3}
       propertyPath: objectName
       value: "\uC810\uD504 \uD3EC\uC158 \uC0DD\uC131\uAE30"
+      objectReference: {fileID: 0}
+    - target: {fileID: 5727897871420573359, guid: 651312d51512df64f8f4bbd41bcea428, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3078,6 +3110,22 @@ PrefabInstance:
     - target: {fileID: 2511705265104342847, guid: 651312d51512df64f8f4bbd41bcea428, type: 3}
       propertyPath: m_Name
       value: ItemGiver
+      objectReference: {fileID: 0}
+    - target: {fileID: 2511705265104342847, guid: 651312d51512df64f8f4bbd41bcea428, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3218941976768080283, guid: 651312d51512df64f8f4bbd41bcea428, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4232632621395214012, guid: 651312d51512df64f8f4bbd41bcea428, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5727897871420573359, guid: 651312d51512df64f8f4bbd41bcea428, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

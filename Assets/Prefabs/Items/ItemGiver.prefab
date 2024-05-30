@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 224439027664266670}
   - component: {fileID: 4467524567516485979}
   - component: {fileID: 8188355300033474189}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: ItemGiver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84,7 +84,7 @@ GameObject:
   - component: {fileID: 1741467270223678978}
   - component: {fileID: 2209903475494454271}
   - component: {fileID: 5989831270265070966}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,7 +165,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8122155414375703309}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: SpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -198,7 +198,7 @@ GameObject:
   - component: {fileID: 9075046548644435612}
   - component: {fileID: 4570725286741793554}
   - component: {fileID: 1112795468296827921}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
