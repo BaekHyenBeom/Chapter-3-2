@@ -5,6 +5,7 @@ public class Player : MonoBehaviour
 {
     public PlayerController controller;
     public PlayerCondition condition;
+    public Inventory inventory;
 
     // 아이템 관련
     public ItemSO itemData;

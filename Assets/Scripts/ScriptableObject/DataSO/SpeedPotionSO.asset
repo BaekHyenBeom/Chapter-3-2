@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf89c5cd60156e545af9f448a160569b, type: 3}
   m_Name: SpeedPotionSO
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
-  icon: {fileID: 0}
+  prefab: {fileID: 4568661539144320578, guid: c9ab85de585495746aafb216be10ab7c, type: 3}
+  icon: {fileID: 21300000, guid: d7ec8e110181f75469c58c9e8c4c9cd5, type: 3}
   Name: "\uC774\uC18D \uD3EC\uC158"
   Desc: "\uC774\uC18D\uC774 \uC99D\uAC00\uD569\uB2C8\uB2E4."
   type: 1

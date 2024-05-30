@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf89c5cd60156e545af9f448a160569b, type: 3}
   m_Name: ImmunityPotionSO
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
-  icon: {fileID: 0}
+  prefab: {fileID: 7931047097199612132, guid: dbfff5a095d32b94dbacfcc1fff9f88a, type: 3}
+  icon: {fileID: 21300000, guid: e39ee7e9c832a1742b6dd3dff198e752, type: 3}
   Name: "\uBB34\uC801 \uD3EC\uC158"
   Desc: "\uC7A0\uC2DC \uBB34\uC801\uC774 \uB429\uB2C8\uB2E4."
   type: 1

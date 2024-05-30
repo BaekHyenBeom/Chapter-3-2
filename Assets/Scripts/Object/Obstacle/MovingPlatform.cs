@@ -34,9 +34,11 @@ public class MovingPlatform : MonoBehaviour
 
     IEnumerator MovePlatform()
     {
-        while (Vector3.Distance(transform.position, directions[curDirectionIdx]) > 0.0001f) // 목표 지점에 도착할 때까지 반복합니다.
+        Vector3 direction = (directions[curDirectionIdx] - transform.position).normalized;
+        while (true) // 목표 지점에 도착할 때까지 반복합니다.
         {
-            transform.position = Vector3.MoveTowards(transform.position, directions[curDirectionIdx], speed * Time.deltaTime);
+            if(Vector3.Distance(transform.position, directions[curDirectionIdx]) < 0.1f) { break; }
+            transform.position = Vector3.MoveTowards(transform.position, directions[curDirectionIdx], speed);
             yield return null;
         }
         yield return new WaitForSeconds(waitTime);

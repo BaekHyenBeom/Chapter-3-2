@@ -8,8 +8,12 @@ public class LazerSight : MonoBehaviour
     public LayerMask playerLayerMask;
 
     [SerializeField] private Transform lazer;
+    [SerializeField] private GameObject trap;
 
-    [SerializeField] private Text text;
+    [SerializeField] private Material Red;
+    [SerializeField] private Material White;
+    [SerializeField] private MeshRenderer Pointer;
+
 
     void Update()
     {
@@ -26,27 +30,26 @@ public class LazerSight : MonoBehaviour
 
         if (Physics.Raycast(rayF, 10f, playerLayerMask))
         {
-            text.text = "정면 감지됨";
         }
         else if (Physics.Raycast(rayB, 10f, playerLayerMask))
         {
-            text.text = "후면 감지됨";
+            Pointer.material = Red;
+            trap.SetActive(true);
         }
         else if (Physics.Raycast(rayL, 10f, playerLayerMask))
         {
-            text.text = "좌측 감지됨";
         }
         else if (Physics.Raycast(rayR, 10f, playerLayerMask))
         {
-            text.text = "우측 감지됨";
         }
         else if (Physics.Raycast(rayU, 10f, playerLayerMask))
         {
-            text.text = "상측 감지됨";
         }
-        else
-        {
-            text.text = "아무것도 감지되지 않음";
-        }
+    }
+    // 인터페이스화 할지 고민 중... (SO화 시켜서 관리하는 건 어떨까 싶은데..)
+
+    public void ReturnColor()
+    {
+        Pointer.material = White;
     }
 }

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf89c5cd60156e545af9f448a160569b, type: 3}
   m_Name: DoubleJumpPotionSO
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
-  icon: {fileID: 0}
+  prefab: {fileID: 5599208274872519593, guid: 8be1d34e1d42875438edfdac4c40b41b, type: 3}
+  icon: {fileID: 21300000, guid: f0619539f1f6e514abbd9ec89e4d2b26, type: 3}
   Name: "\uB354\uBE14\uC810\uD504 \uD3EC\uC158"
   Desc: "\uB354\uBE14 \uC810\uD504\uAC00 \uAC00\uB2A5\uD574\uC9D1\uB2C8\uB2E4."
   type: 1

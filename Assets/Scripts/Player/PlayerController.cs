@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     public float jumpForce;
     public float dashForce;
     public int dashDuration;
-    private bool stopMove;
+    public float stopMove;
     public LayerMask groundLayerMask;
 
     private Vector3 beforeDirection;
@@ -43,8 +43,16 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
+    private void Update()
+    {
+        if (stopMove <= 0) { return; }
+        stopMove -= Time.deltaTime;
+        if (stopMove <= 0) { stopMove = 0f; }
+    }
+
     private void FixedUpdate()
     {
+        
         Move();
     }
 
@@ -108,21 +116,21 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
-        if (stopMove) { return; }
+        if (stopMove > 0) { return; }
         Vector3 dir = transform.forward * curMovementInput.y + transform.right * curMovementInput.x;
         dir *= moveSpeed;
         dir.y = _rigidbody.velocity.y;
 
         if (dir != Vector3.zero)
         {
-            _rigidbody.velocity = dir;
+            _rigidbody.AddForce(dir, ForceMode.Acceleration);
             beforeDirection = dir;
         }
         else
         {
             if(dir != beforeDirection)
             {
-                _rigidbody.velocity = dir;
+                _rigidbody.AddForce(dir, ForceMode.Acceleration);
                 beforeDirection = dir;
             }
         }
@@ -178,13 +186,13 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator Dash(Vector3 dir)
     {
-        stopMove = true;
+        stopMove = 0.01f * dashDuration;
         _rigidbody.AddForce(dir * moveSpeed, ForceMode.VelocityChange);
         for (int i = 0; i < dashDuration; i++)
         {
             _rigidbody.AddForce(dir * dashForce, ForceMode.Impulse);
             yield return new WaitForSeconds(0.01f);
         }
-        stopMove = false;
+        _rigidbody.velocity = Vector3.zero;
     }
 }

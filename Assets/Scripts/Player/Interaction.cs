@@ -63,7 +63,7 @@ public class Interaction : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started && curInteractable != null)
         {
-            curInteractable.OnInteract();
+            curInteractable.OnInteract();            
             curInteractGameObject = null;
             curInteractable = null;
             promptText.gameObject.SetActive(false);
