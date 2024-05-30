@@ -11,7 +11,7 @@
 - 개발 엔진 및 언어: Unity, C#
 
 ## 폴더_구조
-  - 추후에 반영 바람
+![스크린샷 2024-05-30 195925](https://github.com/BaekHyenBeom/Chapter-3-2/assets/167046656/90a880ff-cd98-4939-bd51-b9eb0aec5f06)
 
 ## 구현한_기능
 - 필수 요구 사항 1~6, 선택 요구 사항 1, 2, 3, 7, 8, 9
@@ -50,7 +50,12 @@
 #### 물약
 ![스크린샷 2024-05-30 194121](https://github.com/BaekHyenBeom/Chapter-3-2/assets/167046656/4c7c832d-2b8b-4a0e-9cee-0badc2b516ec)
 - 현재 속도 물약만 기능이 구현됨 (이동 속도와 대쉬 증가)
-- 나머지는 Debug.Log로만 소모되었다는 사실만 알림
+- 나머지는 Debug.Log로 소모되었다는 사실만 알림
 #### 물약 생성기
 ![Movie_014](https://github.com/BaekHyenBeom/Chapter-3-2/assets/167046656/077c01e7-ca4d-410d-b8ea-bb7bcde366ff)
+
+### 기타 구현한 기능
+- 일정 이상 떨어지면 스폰 지점으로 이동
+![Movie_016](https://github.com/BaekHyenBeom/Chapter-3-2/assets/167046656/cc87e046-fc12-4b8f-96da-9fe8ecbdda04)
+
 
